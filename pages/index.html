@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dosenangel – Der Kult-Wurfspaß</title>
+  <title>Dosenangel – Jetzt bestellen</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,6 +11,24 @@
       background: #f9f9f9;
       color: #333;
       text-align: center;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+
+    label {
+      display: grid;
+    }
+
+    input, textarea {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
     header {
@@ -66,14 +84,41 @@
     <h2>Nur 14,99 € – inkl. Versand</h2>
     <p>Einfach. Spaßig. Kultig.<br>Die Dosenangel ist das perfekte Geschenk für Outdoor-Fans.</p>
 
-    <a href="mailto:shop@dosenangel.de?subject=Bestellung Dosenangel&body=Hallo, ich möchte eine Dosenangel bestellen." class="btn">
-      Jetzt bestellen
-    </a>
+    <form id="order-form">
+      <label>Dein Name
+        <input type="text" name="name" required />
+      </label>
+      <label>Deine Adresse
+        <textarea name="address" rows="3" required></textarea>
+      </label>
+      <label>E-Mail
+        <input type="email" name="email" required />
+      </label>
+      <label>Anzahl
+        <input type="number" name="quantity" min="1" value="1" required />
+      </label>
+      <button type="submit" class="btn">Jetzt bestellen</button>
+    </form>
   </main>
 
   <footer>
     © 2025 dosenangel.de – Alle Rechte vorbehalten
   </footer>
+
+  <script>
+    document.getElementById('order-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = this.name.value;
+      const address = this.address.value;
+      const email = this.email.value;
+      const quantity = this.quantity.value;
+      const subject = encodeURIComponent('Bestellung Dosenangel');
+      const body = encodeURIComponent(
+        `Name: ${name}\nAdresse: ${address}\nE-Mail: ${email}\nAnzahl: ${quantity}`
+      );
+      window.location.href = `mailto:shop@dosenangel.de?subject=${subject}&body=${body}`;
+    });
+  </script>
 
 </body>
 </html>
